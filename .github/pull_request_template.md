@@ -16,5 +16,5 @@
 - [ ] ✅ Test
 - [ ] 🤖 Build
 - [ ] 🔁 CI
-- [ ] 📦 Chore (Release)
+- [ ] 📦 Chore
 - [ ] ⏩ Revert
