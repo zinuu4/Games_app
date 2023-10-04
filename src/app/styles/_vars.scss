@@ -1,0 +1,37 @@
+:root {
+  /* Base */
+  --content-width: 1230px;
+  --container-offset: 15px;
+  --container-width: calc(var(--content-width) + (var(--container-offset) * 2));
+  --font-family: 'Nunito', sans-serif;
+
+  /* Animations */
+  --duration: 0.3s;
+
+  /* Colors */
+  --background: #000;
+  --primary: #57f9a1;
+  --on-surface: #fff;
+  --secondary-on-surface: #000;
+  --color-gray-200: #1c1c1f;
+  --color-gray-300: #2a2a2e;
+  --color-gray-400: #3d3d43;
+
+  /* Fonts */
+  --font-size-s: 16px;
+  --font-size-m: 22px;
+  --font-size-l: 28px;
+  --font-size-xl: 34px;
+
+  /* Font-weight */
+  --regular: 400;
+  --semi-bold: 600;
+  --bold: 700;
+
+  /* Borders */
+  --rounded-s: 5px;
+  --rounded-m: 8px;
+
+  /* Box-shadows */
+  --box-shadow-primary: 3px 5px 10px 1px rgb(87 249 161 / 35%);
+}
