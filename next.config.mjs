@@ -18,6 +18,14 @@ const nextConfig = {
     }
     return config;
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn2.softswiss.net',
+      },
+    ],
+  },
 };
 
 export default nextConfig;
