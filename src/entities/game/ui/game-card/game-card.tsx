@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 
-import styles from './styles.module.scss';
+import styles from './game-card.module.scss';
 
 interface GameCardProps {
   identifier: string;
