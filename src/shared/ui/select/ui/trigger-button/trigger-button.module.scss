@@ -1,0 +1,27 @@
+.label {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 15px;
+  background-color: var(--color-gray-200);
+  border-radius: var(--rounded-s);
+}
+
+.icon {
+  display: block;
+  width: 14px;
+  height: 14px;
+  fill: var(--color-gray-light);
+}
+
+.arrow {
+  transform: rotate(-90deg);
+  display: flex;
+  align-items: center;
+  transition: transform var(--duration);
+  opacity: .6;
+  margin-left: 14px;
+
+  &.open {
+    transform: rotate(90deg);
+  }
+}
