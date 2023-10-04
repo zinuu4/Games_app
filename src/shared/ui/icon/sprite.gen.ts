@@ -1,8 +1,8 @@
 export interface SpritesMap {
-  sprite: 'chevron';
+  sprite: 'check' | 'chevron';
 }
 export const SPRITES_META = {
-  sprite: ['chevron'],
+  sprite: ['check', 'chevron'],
 } satisfies {
-  sprite: Array<'chevron'>;
+  sprite: Array<'check' | 'chevron'>;
 };
