@@ -7,11 +7,16 @@ import styles from './button.module.scss';
 
 interface ButtonProps extends ReactTagProps<'button'> {
   title: string;
+  className?: string;
 }
 
-export const Button: React.FC<ButtonProps> = ({ title, ...props }) => (
+export const Button: React.FC<ButtonProps> = ({
+  title,
+  className,
+  ...props
+}) => (
   <button
-    className={clsx(styles.button, 'btn-reset')}
+    className={clsx(styles.button, 'btn-reset', className)}
     {...props}
   >
     {title}
