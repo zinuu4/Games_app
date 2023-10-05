@@ -18,7 +18,7 @@ export const GameCard: React.FC<GameCardProps> = ({ identifier, title }) => (
       <Image
         src={`https://cdn2.softswiss.net/i/s2/${identifier}.png`}
         alt={title}
-        objectFit="contain"
+        className={styles.image}
         layout="fill"
       />
     </div>

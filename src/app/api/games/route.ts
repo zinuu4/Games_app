@@ -9,7 +9,7 @@ export async function GET(req: Request) {
   const limitQuery = searchParams.get('limit');
   const offsetQuery = searchParams.get('offset');
 
-  const limit = limitQuery ? +limitQuery : 12;
+  const limit = limitQuery ? +limitQuery : 999;
   const offset = offsetQuery ? +offsetQuery : 0;
 
   let filteredGames = games;
@@ -24,15 +24,19 @@ export async function GET(req: Request) {
     }, {});
   }
 
-  if (limit) {
-    filteredGames = Object.fromEntries(Object.entries(games).slice(0, limit));
-  }
+  filteredGames = Object.fromEntries(
+    Object.entries(games).slice(offset, offset + limit),
+  );
 
-  if (offset) {
-    filteredGames = Object.fromEntries(
-      Object.entries(games).slice(offset, limit),
-    );
-  }
+  // if (limit) {
+  //   filteredGames = Object.fromEntries(Object.entries(games).slice(0, limit));
+  // }
+
+  // if (offset) {
+  //   filteredGames = Object.fromEntries(
+  //     Object.entries(games).slice(offset, limit),
+  //   );
+  // }
 
   return NextResponse.json(filteredGames);
 }
