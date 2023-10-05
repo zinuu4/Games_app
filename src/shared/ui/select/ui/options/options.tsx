@@ -9,19 +9,21 @@ import { Option } from '../../config';
 import styles from './options.module.scss';
 
 interface SelectOptionsProps {
+  activeFilter: string;
   options: Option[];
   onClick: (value: string) => void;
   isOpen: boolean;
 }
 
 export const SelectOptions: React.FC<SelectOptionsProps> = ({
+  activeFilter,
   options,
   onClick,
   isOpen,
 }) => (
   <div className={clsx(styles.options, isOpen && styles.open)}>
     {options.map((option) => {
-      const isSelected = true;
+      const isSelected = option.value === activeFilter;
       const nothingSelected = false;
 
       return (
