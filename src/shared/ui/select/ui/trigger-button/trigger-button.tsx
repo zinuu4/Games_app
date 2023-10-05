@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 import React from 'react';
 
-import { Icon } from '@/shared/ui';
+// TODO: fix path
+import { Icon } from '../../../icon';
 
 import styles from './trigger-button.module.scss';
 
