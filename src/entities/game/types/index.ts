@@ -8,6 +8,15 @@ export type Game = {
     books?: number;
     all?: number;
     _hd?: number;
+    accumulating?: number;
+    'classic-slots'?: number;
+    'bonus-bet'?: number;
+    jackpot?: number;
+    'hold-and-win'?: number;
+    respin?: number;
+    'expanding-wilds'?: number;
+    'christmas-slots'?: number;
+    'leprechaun-slots'?: number;
     bonusbuy?: number;
     new?: number;
     btcgames?: number;
