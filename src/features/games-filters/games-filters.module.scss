@@ -1,0 +1,12 @@
+.container {
+  padding-top: 100px;
+}
+
+.filters {
+  display: flex;
+  align-items: center;
+}
+
+.select:not(:last-child) {
+  margin-right: 30px;
+}

@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 import React from 'react';
 
-import { Icon } from '@/shared/ui';
+// TODO: fix path
+import { Icon } from '../../../icon';
 
 import { Option } from '../../config';
 
@@ -29,8 +30,8 @@ export const SelectOptions: React.FC<SelectOptionsProps> = ({
           key={option.value}
           className={clsx(
             styles.option,
-            (isSelected || (nothingSelected && option.value === ''))
-              && styles.selected,
+            (isSelected || (nothingSelected && option.value === '')) &&
+              styles.selected,
           )}
         >
           {option.label}
