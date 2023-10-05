@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { GameCard } from '@/entities/game/ui/game-card';
 import { getGames } from '@/shared/services/get-games';
 import { Games } from '@/entities/game/types';
-import { Button } from '@/shared/ui';
+import { Button, ErrorMessage, Loader } from '@/shared/ui';
 
 import styles from './games-list.module.scss';
 
@@ -15,6 +15,9 @@ export const GamesList = () => {
   const [newItemLoading, setNewItemLoading] = useState(true);
   const [offset, setOffset] = useState(0);
   const [gamesEnded, setGamesEnded] = useState(false);
+
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   const onScroll = () => {
     if (gamesEnded) {
@@ -35,12 +38,18 @@ export const GamesList = () => {
 
     setGames((gamesList) => ({ ...gamesList, ...newGamesList }));
     setNewItemLoading(false);
+    setLoading(false);
     setOffset((prevOffset) => prevOffset + 12);
   };
 
   const onRequest = () => {
+    setError(false);
+    setLoading(true);
     setNewItemLoading(true);
-    getGames({ offset, limit: 12 }).then(onGamesListLoaded);
+
+    getGames({ offset, limit: 12 })
+      .then(onGamesListLoaded)
+      .catch(() => setError(true));
   };
 
   useEffect(() => {
@@ -61,6 +70,14 @@ export const GamesList = () => {
     }
   }, [newItemLoading]);
 
+  const errorMessage = error ? (
+    <ErrorMessage
+      title="Ошибка загрузки"
+      onClick={onRequest}
+    />
+  ) : null;
+  const loadingMessage = loading || newItemLoading ? <Loader /> : null;
+
   return (
     <section className={clsx('container', styles.container)}>
       <div className={styles.list}>
@@ -76,6 +93,8 @@ export const GamesList = () => {
           );
         })}
       </div>
+      {errorMessage}
+      {loadingMessage}
       <Button
         className={clsx(styles.button, {
           [styles.disabled]: gamesEnded || newItemLoading,
