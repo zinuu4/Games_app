@@ -12,6 +12,10 @@
   padding-top: 50%;
 }
 
+.image {
+  object-fit: contain;
+}
+
 .title {
   margin-top: 15px;
   font-size: var(--font-size-m);
