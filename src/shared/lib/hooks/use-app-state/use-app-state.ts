@@ -1,3 +1,5 @@
+'use client';
+
 import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
 import { RootState, AppDispatch } from '@/app/providers/store-provider/config';
 
