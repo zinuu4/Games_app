@@ -32,8 +32,8 @@ export const SelectOptions: React.FC<SelectOptionsProps> = ({
           key={option.value}
           className={clsx(
             styles.option,
-            (isSelected || (nothingSelected && option.value === '')) &&
-              styles.selected,
+            (isSelected || (nothingSelected && option.value === ''))
+              && styles.selected,
           )}
         >
           {option.label}
