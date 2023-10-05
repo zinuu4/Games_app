@@ -7,30 +7,28 @@ import { Icon } from '../../../icon';
 import styles from './trigger-button.module.scss';
 
 interface SelectTriggerProps {
+  activeFilter: string;
   onClick: () => void;
   label: string | number;
   isOpen: boolean;
 }
 
 export const SelectTrigger: React.FC<SelectTriggerProps> = ({
+  activeFilter,
   onClick,
   label,
   isOpen,
-}) => {
-  const selectedOption = { label: 'movie', value: '91' };
-
-  return (
-    <div
-      onClick={onClick}
-      className={styles.label}
-    >
-      <span className={styles.value}>{selectedOption?.label ?? label}</span>
-      <span className={clsx(styles.arrow, isOpen && styles.open)}>
-        <Icon
-          name="chevron"
-          className={styles.icon}
-        />
-      </span>
-    </div>
-  );
-};
+}) => (
+  <div
+    onClick={onClick}
+    className={styles.label}
+  >
+    <span className={styles.value}>{activeFilter || label}</span>
+    <span className={clsx(styles.arrow, isOpen && styles.open)}>
+      <Icon
+        name="chevron"
+        className={styles.icon}
+      />
+    </span>
+  </div>
+);

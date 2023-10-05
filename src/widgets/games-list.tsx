@@ -7,25 +7,28 @@ import { GameCard } from '@/entities/game/ui/game-card';
 import { getGames } from '@/shared/services/get-games';
 import { Games } from '@/entities/game/types';
 import { Button, ErrorMessage, Loader } from '@/shared/ui';
+import { useAppSelector } from '@/shared/lib';
 
 import styles from './games-list.module.scss';
+import { filterByCurrency, filterByProvider } from './lib/filter-games';
 
 export const GamesList = () => {
   const [games, setGames] = useState<Games>({});
   const [newItemLoading, setNewItemLoading] = useState(true);
   const [offset, setOffset] = useState(0);
   const [gamesEnded, setGamesEnded] = useState(false);
-
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+
+  const { currency, provider } = useAppSelector((state) => state.filters);
 
   const onScroll = () => {
     if (gamesEnded) {
       return;
     }
     if (
-      window.innerHeight + window.pageYOffset >=
-      document.body.offsetHeight - 1
+      window.innerHeight + window.pageYOffset
+      >= document.body.offsetHeight - 1
     ) {
       setNewItemLoading(true);
     }
@@ -78,10 +81,18 @@ export const GamesList = () => {
   ) : null;
   const loadingMessage = loading || newItemLoading ? <Loader /> : null;
 
+  const filteredGames = filterByCurrency(
+    filterByProvider(games, provider),
+    currency,
+  );
+
+  const isNoGames = Object.keys(filteredGames).length === 0 && !loading;
+  const isButtonDisabled = gamesEnded || newItemLoading || loading || error || isNoGames;
+
   return (
     <section className={clsx('container', styles.container)}>
       <div className={styles.list}>
-        {Object.keys(games).map((gameKey) => {
+        {Object.keys(filteredGames).map((gameKey) => {
           const game = games[gameKey];
 
           return (
@@ -93,15 +104,21 @@ export const GamesList = () => {
           );
         })}
       </div>
+      {isNoGames && (
+        <ErrorMessage
+          title="Игры не найдены"
+          onClick={onRequest}
+        />
+      )}
       {errorMessage}
       {loadingMessage}
       <Button
         className={clsx(styles.button, {
-          [styles.disabled]: gamesEnded || newItemLoading,
+          [styles.disabled]: isButtonDisabled,
         })}
         title="Показать еще"
         onClick={onRequest}
-        disabled={gamesEnded || newItemLoading}
+        disabled={isButtonDisabled}
       />
     </section>
   );
