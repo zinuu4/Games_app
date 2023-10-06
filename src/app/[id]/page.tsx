@@ -15,12 +15,16 @@ type GameProps = {
 export async function generateMetadata({
   params: { id },
 }: GameProps): Promise<Metadata> {
+  const gameIdentifier = decodeURIComponent(id);
+
   return {
-    title: `Game ${id}`,
+    title: `Game ${gameIdentifier}`,
   };
 }
 
 export default function Game({ params: { id } }: GameProps) {
+  const gameIdentifier = decodeURIComponent(id);
+
   return (
     <main className="page-container">
       <BackButton
@@ -28,7 +32,7 @@ export default function Game({ params: { id } }: GameProps) {
         title="На главную"
         path="/"
       />
-      <GameInfo title={id} />
+      <GameInfo gameIdentifier={gameIdentifier} />
     </main>
   );
 }

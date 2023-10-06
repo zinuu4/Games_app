@@ -12,21 +12,18 @@ export async function GET(req: Request) {
   const limit = limitQuery ? +limitQuery : 999;
   const offset = offsetQuery ? +offsetQuery : 0;
 
-  let filteredGames = games;
+  let filteredGames = {};
 
   // TODO: remove ts-ignore
   if (name) {
-    const filteredKeys = Object.keys(games).filter((key) => key === name);
-    filteredGames = filteredKeys.reduce((acc, key) => {
-      // @ts-ignore
-      acc[key] = games[key];
-      return acc;
-    }, {});
+    filteredGames = games[name];
   }
 
-  filteredGames = Object.fromEntries(
-    Object.entries(games).slice(offset, offset + limit),
-  );
+  if (limitQuery && offsetQuery) {
+    filteredGames = Object.fromEntries(
+      Object.entries(games).slice(offset, offset + limit),
+    );
+  }
 
   // if (limit) {
   //   filteredGames = Object.fromEntries(Object.entries(games).slice(0, limit));

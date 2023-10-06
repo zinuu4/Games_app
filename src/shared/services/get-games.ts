@@ -10,3 +10,15 @@ export const getGames = async ({ limit, offset }: GetGamesProps) => {
 
   return response.json();
 };
+
+interface GetSingleGameProps {
+  name: string;
+}
+
+export const getSingleGame = async ({ name }: GetSingleGameProps) => {
+  const response = await fetch(`/api/games?name=${name}`);
+
+  if (!response.ok) throw new Error('Unable to fetch game.');
+
+  return response.json();
+};
