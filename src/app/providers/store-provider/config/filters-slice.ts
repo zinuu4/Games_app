@@ -1,9 +1,11 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { Currencies, Providers } from '@/shared/types';
+
 type filtersState = {
-  provider: string;
-  currency: string;
+  provider: Providers;
+  currency: Currencies;
 };
 
 const initialState: filtersState = {
@@ -15,10 +17,10 @@ const filtersSlice = createSlice({
   name: 'filters',
   initialState,
   reducers: {
-    setProviderFilter(state, action: PayloadAction<string>) {
+    setProviderFilter(state, action: PayloadAction<Providers>) {
       state.provider = action.payload;
     },
-    setCurrencyFilter(state, action: PayloadAction<string>) {
+    setCurrencyFilter(state, action: PayloadAction<Currencies>) {
       state.currency = action.payload;
     },
   },

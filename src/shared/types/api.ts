@@ -1,3 +1,7 @@
+export type Currencies = 'DOG' | 'LTC' | 'USDT' | 'BTC' | 'XRP' | 'ETH' | '';
+
+export type Providers = '1spin4win' | 'belatra' | 'booming' | '';
+
 export type Game = {
   title: string;
   provider: string;
