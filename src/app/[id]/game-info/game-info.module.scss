@@ -6,8 +6,33 @@
   padding-top: 100px;
 }
 
+.imageWrapper {
+  position: relative;
+  width: 500px;
+  height: 250px;
+  margin-bottom: 10px;
+}
+
+.image {
+  object-fit: contain;
+}
+
 .title {
-  font-size: var(--font-xl);
+  font-size: var(--font-size-xl);
+  color: var(--primary);
   margin-bottom: 20px;
   text-transform: uppercase; 
+}
+
+.provider {
+  color: var(--primary);
+}
+
+.currencies {
+  margin-top: 5px;
+}
+
+.currency {
+  margin-left: 20px;
+  color: var(--primary);
 }
