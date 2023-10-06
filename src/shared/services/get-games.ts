@@ -1,24 +1,30 @@
+import { useHttp } from '../lib/hooks/http-hook/http.hook';
+
 interface GetGamesProps {
   limit: number;
   offset: number;
 }
 
-export const getGames = async ({ limit, offset }: GetGamesProps) => {
-  const response = await fetch(`/api/games?limit=${limit}&offset=${offset}`);
-
-  if (!response.ok) throw new Error('Unable to fetch games.');
-
-  return response.json();
-};
-
 interface GetSingleGameProps {
   name: string;
 }
 
-export const getSingleGame = async ({ name }: GetSingleGameProps) => {
-  const response = await fetch(`/api/games?name=${name}`);
+export const useGameService = () => {
+  const { request, loading, error, clearError } = useHttp();
 
-  if (!response.ok) throw new Error('Unable to fetch game.');
+  const getGames = async ({ limit, offset }: GetGamesProps) => {
+    const response = await request(
+      `/api/games?limit=${limit}&offset=${offset}`,
+    );
 
-  return response.json();
+    return response;
+  };
+
+  const getSingleGame = async ({ name }: GetSingleGameProps) => {
+    const response = await request(`/api/games?name=${name}`);
+
+    return response;
+  };
+
+  return { loading, error, clearError, getGames, getSingleGame };
 };
