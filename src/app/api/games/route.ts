@@ -14,7 +14,6 @@ export async function GET(req: Request) {
 
   let filteredGames = {};
 
-  // TODO: remove ts-ignore
   if (name) {
     filteredGames = games[name];
   }
@@ -24,16 +23,6 @@ export async function GET(req: Request) {
       Object.entries(games).slice(offset, offset + limit),
     );
   }
-
-  // if (limit) {
-  //   filteredGames = Object.fromEntries(Object.entries(games).slice(0, limit));
-  // }
-
-  // if (offset) {
-  //   filteredGames = Object.fromEntries(
-  //     Object.entries(games).slice(offset, limit),
-  //   );
-  // }
 
   return NextResponse.json(filteredGames);
 }
