@@ -8,6 +8,7 @@ import {
   setCurrencyFilter,
   setProviderFilter,
 } from '@/app/providers/store-provider/config/filters-slice';
+import { Currencies, Providers } from '@/shared/types';
 
 import { Option } from '../config';
 import { SelectOptions } from './options';
@@ -18,7 +19,7 @@ import styles from './select.module.scss';
 interface SelectorProps {
   activeFilter: string;
   label: string;
-  type: string;
+  type: 'provider' | 'currency';
   options: Option[];
   className?: string;
 }
@@ -36,12 +37,14 @@ export const Select: React.FC<SelectorProps> = ({
 
   useClickOutside(selectRef, () => setIsOpen(false));
 
-  const handleChange = (filter: string) => {
+  const handleChange = (filter: Providers | Currencies) => {
     setIsOpen(false);
 
     if (type === 'provider') {
+      // @ts-ignore
       dispatch(setProviderFilter(filter));
     } else if (type === 'currency') {
+      // @ts-ignore
       dispatch(setCurrencyFilter(filter));
     }
   };

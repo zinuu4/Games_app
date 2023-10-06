@@ -1,4 +1,6 @@
+import { Currencies, Providers } from '@/shared/types';
+
 export interface Option {
-  label: string;
-  value: string;
+  label: Providers | Currencies;
+  value: Providers | Currencies;
 }
