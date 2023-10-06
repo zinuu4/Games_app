@@ -4,8 +4,8 @@ import clsx from 'clsx';
 import React, { useEffect, useState } from 'react';
 
 import { GameCard } from '@/entities/game/ui/game-card';
-import { getGames } from '@/shared/services/get-games';
 import { Games } from '@/entities/game/types';
+import { useGameService } from '@/shared/services/get-games';
 import { Button, ErrorMessage, Loader } from '@/shared/ui';
 import { useAppSelector } from '@/shared/lib';
 
@@ -17,16 +17,17 @@ export const GamesList = () => {
   const [newItemLoading, setNewItemLoading] = useState(true);
   const [offset, setOffset] = useState(0);
   const [gamesEnded, setGamesEnded] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
 
   const { currency, provider } = useAppSelector((state) => state.filters);
+
+  const { getGames, loading, error, clearError } = useGameService();
 
   const onScroll = () => {
     if (gamesEnded) {
       return;
     }
     if (
+      // prettier-ignore
       window.innerHeight + window.pageYOffset
       >= document.body.offsetHeight - 1
     ) {
@@ -41,18 +42,14 @@ export const GamesList = () => {
 
     setGames((gamesList) => ({ ...gamesList, ...newGamesList }));
     setNewItemLoading(false);
-    setLoading(false);
+    clearError();
     setOffset((prevOffset) => prevOffset + 12);
   };
 
   const onRequest = () => {
-    setError(false);
-    setLoading(true);
     setNewItemLoading(true);
 
-    getGames({ offset, limit: 12 })
-      .then(onGamesListLoaded)
-      .catch(() => setError(true));
+    getGames({ offset, limit: 12 }).then(onGamesListLoaded);
   };
 
   useEffect(() => {
@@ -75,7 +72,7 @@ export const GamesList = () => {
 
   const errorMessage = error ? (
     <ErrorMessage
-      title="Ошибка загрузки"
+      title={error.message}
       onClick={onRequest}
     />
   ) : null;
@@ -86,8 +83,17 @@ export const GamesList = () => {
     currency,
   );
 
-  const isNoGames = Object.keys(filteredGames).length === 0 && !loading;
-  const isButtonDisabled = gamesEnded || newItemLoading || loading || error || isNoGames;
+  // prettier-ignore
+  const isNoGames = !Object.keys(filteredGames).length
+    && !Object.keys(games).length
+    && !loading;
+
+  // prettier-ignore
+  const isButtonDisabled = gamesEnded
+    || newItemLoading
+    || loading
+    || error?.status === 500
+    || isNoGames;
 
   return (
     <section className={clsx('container', styles.container)}>

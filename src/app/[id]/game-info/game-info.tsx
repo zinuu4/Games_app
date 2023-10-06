@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 
-import { getSingleGame } from '@/shared/services/get-games';
+import { useGameService } from '@/shared/services/get-games';
 import { Game } from '@/entities/game/types';
 import { ErrorMessage, Loader } from '@/shared/ui';
 
@@ -15,18 +15,15 @@ interface GameInfoProps {
 
 export const GameInfo: React.FC<GameInfoProps> = ({ gameIdentifier }) => {
   const [game, setGame] = useState<Game>();
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+
+  const { getSingleGame, loading, error, clearError } = useGameService();
 
   const onRequest = () => {
-    setLoading(true);
+    clearError();
 
-    getSingleGame({ name: gameIdentifier })
-      .then((game) => {
-        setGame(game);
-        setLoading(false);
-      })
-      .catch(() => setError(true));
+    getSingleGame({ name: gameIdentifier }).then((game) => {
+      setGame(game);
+    });
   };
 
   useEffect(() => {
