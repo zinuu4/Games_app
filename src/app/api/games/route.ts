@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 
+import { sortGamesByPopularity } from './lib';
+
 import { games } from './games';
 
 export async function GET(req: Request) {
@@ -24,5 +26,5 @@ export async function GET(req: Request) {
     );
   }
 
-  return NextResponse.json(filteredGames);
+  return NextResponse.json(sortGamesByPopularity(filteredGames));
 }
