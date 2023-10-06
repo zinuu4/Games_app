@@ -13,6 +13,8 @@ import { filterByCurrency, filterByProvider } from './lib/filter-games';
 
 import styles from './games-list.module.scss';
 
+// TODO: write filters on the backend
+
 export const GamesList = () => {
   const [games, setGames] = useState<Games>({});
   const [newItemLoading, setNewItemLoading] = useState(true);
@@ -27,6 +29,7 @@ export const GamesList = () => {
     if (gamesEnded) {
       return;
     }
+
     if (
       // prettier-ignore
       window.innerHeight + window.pageYOffset
@@ -58,12 +61,16 @@ export const GamesList = () => {
   }, []);
 
   useEffect(() => {
+    if (gamesEnded) {
+      return;
+    }
+
     window.addEventListener('scroll', onScroll);
 
     return () => {
       window.removeEventListener('scroll', onScroll);
     };
-  }, []);
+  }, [gamesEnded]);
 
   useEffect(() => {
     if (newItemLoading) {
@@ -85,9 +92,7 @@ export const GamesList = () => {
   });
 
   // prettier-ignore
-  const isNoGames = !Object.keys(filteredGames).length
-    && !Object.keys(games).length
-    && !loading;
+  const isNoGames = !Object.keys(filteredGames).length && !loading;
 
   // prettier-ignore
   const isButtonDisabled = gamesEnded
