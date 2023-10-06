@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import React, { useEffect, useState } from 'react';
 
 import { GameCard } from '@/entities/game/ui/game-card';
-import { Games } from '@/entities/game/types';
+import { Games } from '@/shared/types';
 import { useGameService } from '@/shared/services';
 import { Button, ErrorMessage, Loader } from '@/shared/ui';
 import { useAppSelector } from '@/shared/lib';
@@ -79,10 +79,10 @@ export const GamesList = () => {
   ) : null;
   const loadingMessage = loading || newItemLoading ? <Loader /> : null;
 
-  const filteredGames = filterByCurrency(
-    filterByProvider(games, provider),
+  const filteredGames = filterByCurrency({
+    data: filterByProvider({ data: games, provider }),
     currency,
-  );
+  });
 
   // prettier-ignore
   const isNoGames = !Object.keys(filteredGames).length

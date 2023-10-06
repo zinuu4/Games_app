@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 import { useGameService } from '@/shared/services';
-import { Game } from '@/entities/game/types';
+import { Game } from '@/shared/types';
 import { ErrorMessage, Loader } from '@/shared/ui';
 
 import styles from './game-info.module.scss';

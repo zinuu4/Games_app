@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import React from 'react';
 
-// TODO: fix path
-import { Icon } from '../../../icon';
+import { Icon } from '@/shared/ui';
+import { Currencies, Providers } from '@/shared/types';
 
 import { Option } from '../../config';
 
@@ -11,7 +11,7 @@ import styles from './options.module.scss';
 interface SelectOptionsProps {
   activeFilter: string;
   options: Option[];
-  onClick: (value: string) => void;
+  onClick: (filter: Providers | Currencies) => void;
   isOpen: boolean;
 }
 
@@ -32,6 +32,7 @@ export const SelectOptions: React.FC<SelectOptionsProps> = ({
           key={option.value}
           className={clsx(
             styles.option,
+            // prettier-ignore
             (isSelected || (nothingSelected && option.value === ''))
               && styles.selected,
           )}

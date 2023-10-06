@@ -1,16 +1,17 @@
-// @ts-nocheck
 /* eslint-disable no-param-reassign */
+import { Currencies, Games, Providers } from '@/shared/types';
 
-// TODO: fix ts errors
+interface FilterByProviderProps {
+  data: Games;
+  provider: Providers;
+}
 
-import { Games } from '@/entities/game/types';
-
-export function filterByProvider(data: Games, provider: string) {
+export function filterByProvider({ data, provider }: FilterByProviderProps) {
   if (provider === '') {
     return data;
   }
 
-  return Object.keys(data).reduce((filteredData, gameKey) => {
+  return Object.keys(data).reduce((filteredData: Games, gameKey) => {
     const game = data[gameKey];
 
     if (game.provider === provider) {
@@ -21,12 +22,17 @@ export function filterByProvider(data: Games, provider: string) {
   }, {});
 }
 
-export function filterByCurrency(data: Games, currency: string) {
+interface FilterByCurrencyProps {
+  data: Games;
+  currency: Currencies;
+}
+
+export function filterByCurrency({ data, currency }: FilterByCurrencyProps) {
   if (currency === '') {
     return data;
   }
 
-  return Object.keys(data).reduce((filteredData, gameKey) => {
+  return Object.keys(data).reduce((filteredData: Games, gameKey) => {
     const game = data[gameKey];
     const { real } = game;
 

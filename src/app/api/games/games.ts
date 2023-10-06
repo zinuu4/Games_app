@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { Games } from '@/entities/game/types';
+import { Games } from '@/shared/types';
 
 export const games: Games = {
   '1spin4win/10LuckySpins': {
