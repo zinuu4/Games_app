@@ -5,12 +5,13 @@ import React, { useEffect, useState } from 'react';
 
 import { GameCard } from '@/entities/game/ui/game-card';
 import { Games } from '@/entities/game/types';
-import { useGameService } from '@/shared/services/get-games';
+import { useGameService } from '@/shared/services';
 import { Button, ErrorMessage, Loader } from '@/shared/ui';
 import { useAppSelector } from '@/shared/lib';
 
-import styles from './games-list.module.scss';
 import { filterByCurrency, filterByProvider } from './lib/filter-games';
+
+import styles from './games-list.module.scss';
 
 export const GamesList = () => {
   const [games, setGames] = useState<Games>({});

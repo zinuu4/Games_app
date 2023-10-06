@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 
-import { useGameService } from '@/shared/services/get-games';
+import { useGameService } from '@/shared/services';
 import { Game } from '@/entities/game/types';
 import { ErrorMessage, Loader } from '@/shared/ui';
 

@@ -1,4 +1,4 @@
-import { useHttp } from '../lib/hooks/http-hook/http.hook';
+import { useHttp } from '../../lib/hooks/http-hook/http.hook';
 
 interface GetGamesProps {
   limit: number;
