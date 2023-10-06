@@ -10,18 +10,20 @@ interface GetSingleGameProps {
 }
 
 export const useGameService = () => {
+  const baseUrl = '/api/games';
+
   const { request, loading, error, clearError } = useHttp();
 
   const getGames = async ({ limit, offset }: GetGamesProps) => {
     const response = await request(
-      `/api/games?limit=${limit}&offset=${offset}`,
+      `${baseUrl}?limit=${limit}&offset=${offset}`,
     );
 
     return response;
   };
 
   const getSingleGame = async ({ name }: GetSingleGameProps) => {
-    const response = await request(`/api/games?name=${name}`);
+    const response = await request(`${baseUrl}?name=${name}`);
 
     return response;
   };
